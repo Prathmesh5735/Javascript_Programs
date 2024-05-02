@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.bg-image{
+    height: 100vh;
+    width: 100%;
+    background-image: url('https://w0.peakpx.com/wallpaper/669/659/HD-wallpaper-3d-winter-view-2013-beautiful-nature-new-nice-scenary.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: blur(5px);
+}
+
+.upper{
+    background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.4);
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;   
+
+}
+
+h1 {
+    color: #F5F5F5;
+    font-size: 40px;
+}
+
+table {
+    margin: auto;
+}
+
+th {
+    color: #FFFFFF;
+}
+
+input {
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+button {
+    min-width: 120px;
+    margin: 20px 10px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+}
+
+.heading {
+    color: #F5F5F5;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.time {
+    background-color: #090909;
+    color: #FFFFFF;
+    font-size: 100px;
+    width: 150px;
+    margin: 0 10px;
+}
