@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Api</title>
+<style>
+  .slider {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .slide-container {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .card {
+    flex: 0 0 300px; /* Card width */
+    margin: 0 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+
+<h1>User Card Slider</h1>
+
+<div class="slider">
+  <div class="slide-container" id="slide-container">
+    <!-- User data cards will be appended here -->
+  </div>
+</div>
+
+<script>
+  // Fetch the API
+  fetch('https://reqres.in/api/users?page=2')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Process the fetched data and create cards
+      const slideContainer = document.getElementById('slide-container');
+      data.data.forEach(user => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const image = document.createElement('img');
+        image.src = user.avatar;
+        image.alt = `${user.first_name} ${user.last_name}`;
+
+        const cardContent = document.createElement('div');
+        cardContent.classList.add('card-content');
+        cardContent.innerHTML = `<h2>${user.first_name} ${user.last_name}</h2><p>Email: ${user.email}</p>`;
+
+        card.appendChild(image);
+        card.appendChild(cardContent);
+        slideContainer.appendChild(card);
+      });
+
+      // Activate slider
+      const slider = document.querySelector('.slider');
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      slider.addEventListener('mousedown', e => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+      });
+
+      slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+      });
+
+      slider.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 0.5; // Adjust scroll speed
+        slider.scrollLeft = scrollLeft - walk;
+      });
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+</script>
+
+</body>
+</html>
